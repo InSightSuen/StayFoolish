@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.drag.DragActivity"/>
+        <activity android:name=".ui.image.GalleryActivity"/>
+        <activity android:name=".ui.toast.ToastActivity"/>
     </application>
 
 </manifest>

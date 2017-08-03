@@ -7,6 +7,7 @@ import android.view.View;
 import com.insightsuen.stayfoolish.R;
 import com.insightsuen.stayfoolish.base.BaseActivity;
 import com.insightsuen.stayfoolish.ui.drag.DragActivity;
+import com.insightsuen.stayfoolish.ui.toast.ToastActivity;
 
 /**
  * Created by InSight Suen on 2017/7/12.
@@ -23,4 +24,7 @@ public class MainActivity extends BaseActivity {
         DragActivity.start(this);
     }
 
+    public void onClickToast(View view) {
+        ToastActivity.start(this);
+    }
 }

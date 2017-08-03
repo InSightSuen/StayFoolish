@@ -14,4 +14,14 @@
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/rect_primary_r4dp"
+        android:onClick="onClickToast"
+        android:text="@string/btn_toast"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"/>
+
 </LinearLayout>
