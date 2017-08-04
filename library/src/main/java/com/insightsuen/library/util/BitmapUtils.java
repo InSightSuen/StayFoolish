@@ -134,9 +134,9 @@ public class BitmapUtils {
 
         float scale;
         if (reqWidth == 0) {
-            scale = reqHeight / source.getHeight();
+            scale = (float) reqHeight / source.getHeight();
         } else if (reqHeight == 0) {
-            scale = reqWidth / source.getWidth();
+            scale = (float) reqWidth / source.getWidth();
         } else {
             scale = Math.min((float) reqWidth / source.getWidth(),
                     (float) reqHeight / source.getHeight());
@@ -179,6 +179,10 @@ public class BitmapUtils {
             while ((halfHeight / inSampleSize) > reqHeight
                     && (halfWidth / inSampleSize) > reqWidth) {
                 inSampleSize *= 2;
+            }
+
+            if (reqHeight == 0 || reqWidth == 0) {
+                return inSampleSize;
             }
 
             // This offers some additional logic in case the image has a strange
