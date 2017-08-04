@@ -8,11 +8,11 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.Nullable;
+import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.Element;
+import android.support.v8.renderscript.RenderScript;
+import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -79,11 +79,7 @@ public class BlurActivity extends BaseActivity {
         for (int i = 0; i < NUM_BITMAPS; i++) {
             mOutAllocations[i] = Allocation.createFromBitmap(RS, mBitmapOut[i]);
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            mScriptBlur = ScriptIntrinsicBlur.create(RS, Element.U8_4(RS));
-        }
-
+        mScriptBlur = ScriptIntrinsicBlur.create(RS, Element.U8_4(RS));
         mBlurRadius = 1.f;
     }
 
