@@ -5,6 +5,8 @@
     <color name="colorAccent">#1E88E5</color>
 
     <color name="colorWhite">#fff</color>
+    <color name="colorGrey">#eee</color>
+    <color name="colorGreyDark">#666</color>
     <color name="colorBlack">#000</color>
     <color name="colorDark">#222</color>
     <color name="colorTransparent">#0000</color>
@@ -12,11 +14,15 @@
     <color name="colorTransparent70">#b3000000</color>
 
     <color name="bgWhite">@color/colorWhite</color>
+    <color name="bgGrey">@color/colorGrey</color>
     <color name="bgDark">@color/colorPrimaryDark</color>
     <color name="bgTransparent40">@color/colorTransparent40</color>
     <color name="bgTransparent70">@color/colorTransparent70</color>
 
-    <color name="textMain">@color/colorDark</color>
+    <color name="textMain">@color/colorBlack</color>
     <color name="textMainWhite">@color/colorWhite</color>
+    <color name="textMainPrimary">@color/colorPrimary</color>
+    <color name="textContent">@color/colorDark</color>
+    <color name="textHint">@color/colorGreyDark</color>
 
 </resources>

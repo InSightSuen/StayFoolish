@@ -2,22 +2,62 @@
 <resources>
 
     <style name="TextView" parent="android:Widget.TextView">
-        <item name="android:textAppearance">@style/TextAppearance</item>
+        <item name="android:padding">@dimen/paddingText</item>
+        <item name="android:textAppearance">@style/TextAppearance.TextView</item>
     </style>
 
-    <style name="Button" parent="Base.Widget.AppCompat.Button">
+    <style name="Button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rect_primary_r4dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textAppearance">@style/TextAppearance.Button</item>
     </style>
 
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textAppearance">@style/TextAppearance.TextView</item>
+        <item name="android:textColor">@color/textContent</item>
+    </style>
+
+    <style name="CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textColor">@color/textMainPrimary</item>
+        <item name="android:textAppearance">@style/TextAppearance.Button</item>
+    </style>
+
+    <style name="RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/textMainPrimary</item>
+        <item name="android:textAppearance">@style/TextAppearance.Button</item>
+    </style>
+
+    <style name="Toggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/textMainPrimary</item>
+        <item name="android:textAppearance">@style/TextAppearance.Button</item>
+        <item name="android:textOn">State on</item>
+        <item name="android:textOff">State off</item>
+    </style>
+
+    <style name="Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="switchTextAppearance">@style/TextAppearance.CompoundButton</item>
+    </style>
+
+    <!--TextAppearance-->
     <style name="TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/textMain</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.TextView">
+        <item name="android:textColor">@color/textContent</item>
         <item name="android:textSize">@dimen/textContent</item>
-        <item name="android:textColor">@color/textMain</item>
+    </style>
+
+    <style name="TextAppearance.CompoundButton">
+        <item name="android:textColor">@color/textMainPrimary</item>
+        <item name="android:textSize">@dimen/textContent</item>
     </style>
 
     <style name="TextAppearance.Button">
         <item name="android:textColor">@color/textMainWhite</item>
+        <item name="android:textSize">@dimen/textContent</item>
     </style>
 
 </resources>
