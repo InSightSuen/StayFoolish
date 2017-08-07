@@ -205,13 +205,13 @@ public class BitmapUtils {
     }
 
     /**
-     * Shape the original bitmap by the mask bitmap decoded from mask resource id.
+     * Mask the original bitmap by the mask bitmap decoded from mask resource id.
      *
      * @param src       the original bitmap
      * @param maskResId the mask resource id.
      * @return a new shaped bitmap
      */
-    public static Bitmap shape(Context context, Bitmap src, int maskResId) {
+    public static Bitmap mask(Context context, Bitmap src, int maskResId) {
         if (context == null) {
             throw new NullPointerException("context is null.");
         }
