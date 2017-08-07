@@ -4,5 +4,6 @@
     <string name="btn_drag_and_drop">Drag and Drop</string>
     <string name="btn_toast">Toast</string>
     <string name="btn_blur">Blur</string>
+    <string name="btn_unify_style">Unify Style</string>
     <string name="btn_gallery">Gallery</string>
 </resources>
