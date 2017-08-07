@@ -8,30 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/rect_primary_r4dp"
         android:onClick="onClickDragAndDrop"
-        android:text="@string/btn_drag_and_drop"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"/>
+        android:text="@string/btn_drag_and_drop"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/rect_primary_r4dp"
         android:onClick="onClickToast"
-        android:text="@string/btn_toast"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"/>
+        android:text="@string/btn_toast"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/rect_primary_r4dp"
         android:onClick="onClickBlur"
-        android:text="@string/btn_blur"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"/>
+        android:text="@string/btn_blur"/>
 
 </LinearLayout>

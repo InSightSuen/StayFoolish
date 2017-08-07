@@ -23,8 +23,7 @@
             android:background="@drawable/rect_white_40_r4dp"
             android:padding="8dp"
             android:text="Tap on it"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp"/>
+            android:textColor="@color/colorPrimary"/>
 
     </RelativeLayout>
 

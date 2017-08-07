@@ -5,17 +5,18 @@
     <dimen name="spaceNormal">8dp</dimen>
     <dimen name="spaceSmall">4dp</dimen>
 
-    <dimen name="heightButton">48dp</dimen>
-
-    <dimen name="textMain">18sp</dimen>
-    <dimen name="textSecond">16sp</dimen>
-    <dimen name="textContent">14sp</dimen>
-    
     <dimen name="paddingLayout">@dimen/spaceNormal</dimen>
     <dimen name="paddingText">@dimen/spaceSmall</dimen>
+
+    <dimen name="heightButton">48dp</dimen>
 
     <dimen name="cornerLarge">48dp</dimen>
     <dimen name="cornerNormal">4dp</dimen>
     <dimen name="cornerSmall">2dp</dimen>
+
+    <dimen name="textMain">18sp</dimen>
+    <dimen name="textSecond">16sp</dimen>
+    <dimen name="textContent">14sp</dimen>
+    <dimen name="textToast">14sp</dimen>
 
 </resources>
