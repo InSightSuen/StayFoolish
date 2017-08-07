@@ -3,11 +3,11 @@ package com.insightsuen.stayfoolish.ui.toast;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
@@ -19,7 +19,7 @@ import com.insightsuen.stayfoolish.base.BaseActivity;
  * Created by InSight Suen on 2017/7/28.
  */
 
-public class ToastActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
+public class ToastActivity extends BaseActivity implements View.OnClickListener {
 
     private ToastHelper mToastHelper;
 
@@ -60,9 +60,19 @@ public class ToastActivity extends BaseActivity implements RadioGroup.OnCheckedC
         etMsg = (EditText) findViewById(R.id.et_msg);
 
         rgGravityHorizontal = (RadioGroup) findViewById(R.id.rg_horizontal);
-        rgGravityHorizontal.setOnCheckedChangeListener(this);
+        for (int i = 0; i < rgGravityHorizontal.getChildCount(); i++) {
+            View radioButton = rgGravityHorizontal.getChildAt(i);
+            if (radioButton instanceof RadioButton) {
+                radioButton.setOnClickListener(this);
+            }
+        }
         rgGravityVertical = (RadioGroup) findViewById(R.id.rg_vertical);
-        rgGravityVertical.setOnCheckedChangeListener(this);
+        for (int i = 0; i < rgGravityVertical.getChildCount(); i++) {
+            View radioButton = rgGravityVertical.getChildAt(i);
+            if (radioButton instanceof RadioButton) {
+                radioButton.setOnClickListener(this);
+            }
+        }
 
         sbXOffSet = (SeekBar) findViewById(R.id.sb_x_offset);
         sbXOffSet.setMax(200);
@@ -124,8 +134,8 @@ public class ToastActivity extends BaseActivity implements RadioGroup.OnCheckedC
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        switch (checkedId) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.rb_left:
                 mGravityHorizontal = Gravity.LEFT;
                 break;

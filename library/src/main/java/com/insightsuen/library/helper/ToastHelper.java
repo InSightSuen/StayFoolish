@@ -28,15 +28,22 @@ public class ToastHelper implements Handler.Callback {
     private static final int MIN_LIVE_TIME = 3 * 1000;
     private static final int DEFAULT_MAX_LIVE_TIME = 10 * 1000;
 
+    private static final int PARAM_GRAVITY = 0;
+    private static final int PARAM_X_OFFSET = 1;
+    private static final int PARAM_Y_OFFSET = 2;
+
     private WeakReference<Context> mContextRef;
     private Handler mHandler = null;
     private Toast mToast = null;
     private int mMaxLiveTime;
 
+    private boolean mParamDirty = true;
+
     private boolean mUseSystemGravity = true;
     private int mGravity;
     private int mXOffset;
     private int mYOffset;
+    private int[] mDefaultGravityParams;
 
     private int mLayoutResId;
     private int mMessageTextViewId;
@@ -76,17 +83,21 @@ public class ToastHelper implements Handler.Callback {
             mMaxLiveTime = MIN_LIVE_TIME;
         }
         mHandler = new Handler(this);
-        getToast(applicationContext);
+        loadDefaultGravityParams(applicationContext);
     }
 
     public void setView(int layoutResId, int messageTextViewId) {
         mLayoutResId = layoutResId;
         mMessageTextViewId = messageTextViewId;
+
+        invalidate();
     }
 
     public void useDeafultView() {
         mLayoutResId = 0;
         mMessageTextViewId = 0;
+
+        invalidate();
     }
 
     public void setGravity(int gravity) {
@@ -98,32 +109,26 @@ public class ToastHelper implements Handler.Callback {
         mGravity = gravity;
         mXOffset = offsetX;
         mYOffset = offsetY;
-        if (mToast != null) {
-            mToast.cancel();
-        }
-        mToast = null;
-        getToast(getContext());
+
+        invalidate();
     }
 
     public void userDefaultGravity() {
         mUseSystemGravity = true;
-        if (mToast != null) {
-            mToast.cancel();
-        }
-        mToast = null;
-        getToast(getContext());
+
+        invalidate();
     }
 
     public int getGravity() {
-        return mGravity;
+        return mUseSystemGravity ? mDefaultGravityParams[PARAM_GRAVITY] : mGravity;
     }
 
     public int getXOffset() {
-        return mXOffset;
+        return mUseSystemGravity ? mDefaultGravityParams[PARAM_X_OFFSET] : mXOffset;
     }
 
     public int getYOffset() {
-        return mYOffset;
+        return mUseSystemGravity ? mDefaultGravityParams[PARAM_Y_OFFSET] : mYOffset;
     }
 
     public void show(@StringRes final int tips) {
@@ -164,32 +169,47 @@ public class ToastHelper implements Handler.Callback {
     }
 
     private Toast getToast(Context context) {
-        if (mToast == null) {
+        if (mToast == null || mParamDirty) {
             synchronized (ToastHelper.class) {
-                if (mToast == null)
-                if (DEBUG) {
-                    Log.d(TAG, "create toast");
-                }
-                Toast toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
-                if (mUseSystemGravity) {
-                    mGravity = toast.getGravity();
-                    mXOffset = toast.getXOffset();
-                    mYOffset = toast.getYOffset();
-                }
-                if (mLayoutResId > 0) {
-                    toast.cancel();
+                if (mToast == null || mParamDirty) {
+                    if (DEBUG) {
+                        Log.d(TAG, "create toast");
+                    }
 
-                    toast = new Toast(context);
-                    LayoutInflater inflate = (LayoutInflater)
-                            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View view = inflate.inflate(mLayoutResId, null);
-                    toast.setView(view);
+                    Toast toast;
+                    if (mLayoutResId > 0) {
+                        toast = new Toast(context);
+                        LayoutInflater inflate = (LayoutInflater)
+                                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        View view = inflate.inflate(mLayoutResId, null);
+                        toast.setView(view);
+                    } else {
+                        toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+                    }
+                    toast.setGravity(getGravity(), getXOffset(), getYOffset());
+
+                    mToast = toast;
+                    mParamDirty = false;
                 }
-                toast.setGravity(mGravity, mXOffset, mYOffset);
-                mToast = toast;
             }
         }
         return mToast;
+    }
+
+    private void invalidate() {
+        if (mToast != null) {
+            mToast.cancel();
+            mToast = null;
+        }
+        mParamDirty = true;
+    }
+
+    private void loadDefaultGravityParams(Context context) {
+        Toast toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+        mDefaultGravityParams = new int[3];
+        mDefaultGravityParams[PARAM_GRAVITY] = toast.getGravity();
+        mDefaultGravityParams[PARAM_X_OFFSET] = toast.getXOffset();
+        mDefaultGravityParams[PARAM_Y_OFFSET] = toast.getYOffset();
     }
 
     @Override
