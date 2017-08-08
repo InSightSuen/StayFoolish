@@ -9,16 +9,21 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.insightsuen.library.helper.ToastHelper;
 import com.insightsuen.library.util.BitmapUtils;
 import com.insightsuen.library.util.ViewUtils;
 import com.insightsuen.stayfoolish.R;
@@ -29,6 +34,11 @@ import com.insightsuen.stayfoolish.base.BaseActivity;
  */
 
 public class BlurActivity extends BaseActivity {
+
+    private static final String TAG = "BlurActivity";
+
+    private static final int SWIPE_THRESHOLD_VELOCITY = ViewUtils.dp2px(30);
+    private static final int MIN_VIEW_DRAG_HEIGHT = ViewUtils.dp2px(208);
 
     // Number of bitmaps that is used for renderScript thread and UI thread synchronization.
     private final int NUM_BITMAPS = 2;
@@ -46,6 +56,11 @@ public class BlurActivity extends BaseActivity {
     private RenderScriptTask mLatestTask;
     private float mBlurRadius;
     private ValueAnimator mLatestAnimator;
+
+    private GestureDetectorCompat mGestureDetector;
+
+    private View mViewDrag;
+    private View mGroupRoot;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, BlurActivity.class);
@@ -70,6 +85,8 @@ public class BlurActivity extends BaseActivity {
         mCurrentBitmap += (mCurrentBitmap + 1) % NUM_BITMAPS;
 
         createScript();
+
+        ToastHelper.getInstance().init(this);
     }
 
     private void createScript() {
@@ -103,6 +120,30 @@ public class BlurActivity extends BaseActivity {
         });
 
         startBlur(1.0f);
+
+
+
+        mGestureDetector = new GestureDetectorCompat(this, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                int yDistance = (int) (e1.getY() - e2.getY());
+                Log.d(TAG, "onFling: yDistance=" + yDistance + " velocityY=" + velocityY);
+
+                if (velocityY > SWIPE_THRESHOLD_VELOCITY) {
+                    // fling to bottom
+                    finishDrag(mViewDrag, mGroupRoot.getHeight() - MIN_VIEW_DRAG_HEIGHT);
+                    return true;
+                } else if (-velocityY > SWIPE_THRESHOLD_VELOCITY) {
+                    // fling to top
+                    finishDrag(mViewDrag, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+        mViewDrag = findViewById(R.id.v_drag);
+        mViewDrag.setOnTouchListener(new DragListener());
+        mGroupRoot = findViewById(R.id.group_root);
     }
 
     private void startBlurAnimator() {
@@ -191,5 +232,76 @@ public class BlurActivity extends BaseActivity {
             }
         }
 
+    }
+
+    private class DragListener implements View.OnTouchListener {
+
+        private int yDelta = 0;
+        private int mMaxTopMargin = -1;
+        private int mMinTopMargin = 0;
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (mMaxTopMargin < 0) {
+                mMaxTopMargin = ((View) v.getParent()).getHeight() - MIN_VIEW_DRAG_HEIGHT;
+            }
+            if (mGestureDetector.onTouchEvent(event)) {
+                return false;
+            }
+            int y = (int) event.getRawY();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    yDelta = layoutParams.topMargin - y;
+                    break;
+                }
+
+                case MotionEvent.ACTION_MOVE: {
+                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    int newTopMargin = y + yDelta;
+                    if (newTopMargin < mMinTopMargin) {
+                        newTopMargin = mMinTopMargin;
+                    } else if (newTopMargin > mMaxTopMargin) {
+                        newTopMargin = mMaxTopMargin;
+                    }
+                    layoutParams.topMargin = newTopMargin;
+                    v.setLayoutParams(layoutParams);
+                    v.requestLayout();
+                    break;
+                }
+
+                case MotionEvent.ACTION_UP: {
+                    int newTopMargin = y + yDelta;
+                    int midValue = (mMaxTopMargin - mMinTopMargin) / 2;
+                    if (newTopMargin > midValue) {
+                        newTopMargin = mMaxTopMargin;
+                    } else {
+                        newTopMargin = mMinTopMargin;
+                    }
+                    finishDrag(v, newTopMargin);
+                    break;
+                }
+            }
+            return true;
+        }
+
+    }
+
+    private void finishDrag(final View view, int targetMarginTop) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        ValueAnimator animator = ValueAnimator.ofInt(layoutParams.topMargin, targetMarginTop);
+        animator.setDuration(150);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+                layoutParams.topMargin = value;
+                view.setLayoutParams(layoutParams);
+                view.requestLayout();
+            }
+        });
+        animator.start();
     }
 }
