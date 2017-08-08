@@ -41,7 +41,12 @@ public class ToastActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected int getLayoutRes() {
+        return R.layout.activity_toast;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toast);
         initData();
