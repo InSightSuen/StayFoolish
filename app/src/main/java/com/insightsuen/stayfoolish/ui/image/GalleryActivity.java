@@ -45,11 +45,15 @@ public class GalleryActivity extends BaseActivity implements LoaderManager.Loade
     private List<ImageInfo> mImageInfo;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gallery);
         initData();
         initWidgets();
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_gallery;
     }
 
     private void initData() {
