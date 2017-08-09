@@ -34,7 +34,7 @@
                 android:layout_centerInParent="true"
                 android:background="@drawable/rect_white_40_r4dp"
                 android:padding="8dp"
-                android:text="Tap on it"
+                android:text="Tap or Drag"
                 android:textColor="@color/colorPrimary"/>
 
         </RelativeLayout>
