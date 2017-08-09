@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.TextView;
 
 import com.insightsuen.bindroid.utils.ViewModelUtil;
 import com.insightsuen.bindroid.viewmodel.LifecycleViewModel;
@@ -22,8 +21,8 @@ import com.insightsuen.stayfoolish.base.BaseActivity;
 
 /**
  * Created by InSight Suen on 2017/8/4.
+ * Blur test activity
  */
-
 public class BlurActivity extends BaseActivity<BlurBinding> {
 
     private static final String TAG = "BlurActivity";
@@ -33,9 +32,6 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
     private static final int MIN_VIEW_DRAG_HEIGHT = ViewUtils.dp2px(208);
 
     private GestureDetectorCompat mGestureDetector;
-
-    private View mViewDrag;
-    private View mGroupRoot;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, BlurActivity.class);
@@ -60,14 +56,14 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
                 getSupportFragmentManager(), EXTRA_VIEW_MODEL);
         if (viewModel == null) {
             viewModel = new BlurViewModel();
-            ViewModelUtil.addToFragmentManager(getSupportFragmentManager(), viewModel, EXTRA_VIEW_MODEL);
+            ViewModelUtil.addToFragmentManager(getSupportFragmentManager(),
+                    viewModel, EXTRA_VIEW_MODEL);
         }
         return viewModel;
     }
 
     private void initWidgets() {
-        TextView tvTap = (TextView) findViewById(R.id.tv_tap);
-        tvTap.setOnTouchListener(new View.OnTouchListener() {
+        mBinding.ivBg.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -83,31 +79,33 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
             }
         });
 
-        mGestureDetector = new GestureDetectorCompat(this, new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                int yDistance = (int) (e1.getY() - e2.getY());
-                Log.d(TAG, "onFling: yDistance=" + yDistance + " velocityY=" + velocityY);
+        mGestureDetector = new GestureDetectorCompat(this,
+                new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2,
+                            float velocityX, float velocityY) {
+                        int yDistance = (int) (e1.getY() - e2.getY());
+                        Log.d(TAG, "onFling: yDistance=" + yDistance + " velocityY=" + velocityY);
 
-                if (velocityY > SWIPE_THRESHOLD_VELOCITY) {
-                    // fling to bottom
-                    finishDrag(mViewDrag, mGroupRoot.getHeight() - MIN_VIEW_DRAG_HEIGHT);
-                    return true;
-                } else if (-velocityY > SWIPE_THRESHOLD_VELOCITY) {
-                    // fling to top
-                    finishDrag(mViewDrag, 0);
-                    return true;
-                }
-                return false;
-            }
-        });
-        mViewDrag = findViewById(R.id.v_drag);
-        mViewDrag.setOnTouchListener(new DragListener());
-        mGroupRoot = findViewById(R.id.group_root);
+                        if (velocityY > SWIPE_THRESHOLD_VELOCITY) {
+                            // fling to bottom
+                            finishDrag(mBinding.vDrag,
+                                    mBinding.groupRoot.getHeight() - MIN_VIEW_DRAG_HEIGHT);
+                            return true;
+                        } else if (-velocityY > SWIPE_THRESHOLD_VELOCITY) {
+                            // fling to top
+                            finishDrag(mBinding.vDrag, 0);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+        mBinding.vDrag.setOnTouchListener(new DragListener());
     }
 
     private void finishDrag(final View view, int targetMarginTop) {
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        ViewGroup.MarginLayoutParams layoutParams =
+                (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         ValueAnimator animator = ValueAnimator.ofInt(layoutParams.topMargin, targetMarginTop);
         animator.setDuration(150);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -115,7 +113,8 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int value = (int) animation.getAnimatedValue();
-                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+                ViewGroup.MarginLayoutParams layoutParams =
+                        (ViewGroup.MarginLayoutParams) view.getLayoutParams();
                 layoutParams.topMargin = value;
                 view.setLayoutParams(layoutParams);
                 view.requestLayout();
@@ -141,13 +140,15 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
             int y = (int) event.getRawY();
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
-                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    ViewGroup.MarginLayoutParams layoutParams =
+                            (ViewGroup.MarginLayoutParams) v.getLayoutParams();
                     yDelta = layoutParams.topMargin - y;
                     break;
                 }
 
                 case MotionEvent.ACTION_MOVE: {
-                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                    ViewGroup.MarginLayoutParams layoutParams =
+                            (ViewGroup.MarginLayoutParams) v.getLayoutParams();
                     int newTopMargin = y + yDelta;
                     if (newTopMargin < mMinTopMargin) {
                         newTopMargin = mMinTopMargin;

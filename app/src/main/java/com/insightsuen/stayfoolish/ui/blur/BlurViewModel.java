@@ -22,8 +22,8 @@ import com.insightsuen.stayfoolish.R;
 
 /**
  * Created by InSight Suen on 2017/8/8.
+ * Blur test ViewModel
  */
-
 public class BlurViewModel extends LifecycleViewModel {
 
     // Number of bitmaps that is used for renderScript thread and UI thread synchronization.
@@ -51,7 +51,8 @@ public class BlurViewModel extends LifecycleViewModel {
                 R.drawable.img_cat, 0, ViewUtils.dp2px(200), Bitmap.Config.ARGB_8888);
         mBitmapOut = new Bitmap[NUM_BITMAPS];
         for (int i = 0; i < NUM_BITMAPS; i++) {
-            mBitmapOut[i] = Bitmap.createBitmap(mBitmapIn.getWidth(), mBitmapIn.getHeight(), mBitmapIn.getConfig());
+            mBitmapOut[i] = Bitmap.createBitmap(mBitmapIn.getWidth(),
+                    mBitmapIn.getHeight(), mBitmapIn.getConfig());
         }
         mCurrentBitmap += (mCurrentBitmap + 1) % NUM_BITMAPS;
         createScript(context);
