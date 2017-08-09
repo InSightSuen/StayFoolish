@@ -20,6 +20,8 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -205,13 +207,13 @@ public class BitmapUtils {
     }
 
     /**
-     * Shape the original bitmap by the mask bitmap decoded from mask resource id.
+     * Mask the original bitmap by the mask bitmap decoded from mask resource id.
      *
      * @param src       the original bitmap
      * @param maskResId the mask resource id.
      * @return a new shaped bitmap
      */
-    public static Bitmap shape(Context context, Bitmap src, int maskResId) {
+    public static Bitmap mask(Context context, Bitmap src, int maskResId) {
         if (context == null) {
             throw new NullPointerException("context is null.");
         }
@@ -242,6 +244,103 @@ public class BitmapUtils {
             src.recycle();
         }
         return shaped;
+    }
+
+    /**
+     * <p>Crop the given bitmap to match the dstWidth an dstHeight. The method will crop the original
+     * bitmap by the <code>gravity</code> value.</p>
+     * <p>The dstWidth and dstHeight must be positive. This method will scale the bitmap before crop.
+     * </p>
+     *
+     * @param source    original bitmap
+     * @param dstWidth  width of result bitmap, must be positive
+     * @param dstHeight height of result bitmap, must be positive
+     * @param gravity   crop gravity, {@link Gravity#CENTER} is the default value
+     * @return a cropped bitmap
+     */
+    public static Bitmap crop(Bitmap source, int dstWidth, int dstHeight, int gravity) {
+        if (source == null) {
+            throw new NullPointerException("src bitmap is null");
+        }
+        if (dstWidth == 0 || dstHeight == 0) {
+            throw new IllegalArgumentException("dstWidth or dstHeight can not be 0.");
+        }
+        if (gravity <= 0) {
+            gravity = Gravity.CENTER;
+        }
+
+        float scale = Math.max((float) dstWidth / source.getWidth(),
+                (float) dstHeight / source.getHeight());
+        Bitmap scaled;
+        if (scale < 1.0f) {
+            int scaledWith = (int) (source.getWidth() * scale);
+            int scaledHeight = (int) (source.getHeight() * scale);
+            scaled = Bitmap.createScaledBitmap(source, scaledWith, scaledHeight, false);
+            if (scaled != source) {
+                source.recycle();
+            }
+        } else {
+            scaled = source;
+        }
+
+        Bitmap cropped;
+        int width = scaled.getWidth();
+        int horizontalGravity = gravity & Gravity.HORIZONTAL_GRAVITY_MASK;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (horizontalGravity == Gravity.START || horizontalGravity == Gravity.END) {
+                horizontalGravity = Gravity.getAbsoluteGravity(horizontalGravity, View.LAYOUT_DIRECTION_LOCALE);
+            }
+        }
+        int startX;
+        switch (horizontalGravity) {
+            case Gravity.LEFT:
+                startX = 0;
+                break;
+
+            case Gravity.RIGHT:
+                startX = width - dstWidth;
+                break;
+
+            case Gravity.CENTER_HORIZONTAL:
+            default:
+                startX = (width - dstWidth) / 2;
+                break;
+        }
+        if (startX < 0) {
+            startX = 0;
+        }
+        if (startX + dstWidth > scaled.getWidth()) {
+            dstWidth = scaled.getWidth() - startX;
+        }
+
+        int height = scaled.getHeight();
+        int startY;
+        switch (gravity & Gravity.VERTICAL_GRAVITY_MASK) {
+            case Gravity.TOP:
+                startY = 0;
+                break;
+
+            case Gravity.BOTTOM:
+                startY = height - dstHeight;
+                break;
+
+            case Gravity.CENTER_VERTICAL:
+            default:
+                startY = (height - dstHeight) / 2;
+                break;
+        }
+        if (startY < 0) {
+            startY = 0;
+        }
+        if (startY + dstHeight > scaled.getHeight()) {
+            dstWidth = scaled.getHeight() - startY;
+        }
+
+        cropped = Bitmap.createBitmap(scaled, startX, startY, dstWidth, dstHeight);
+        if (cropped != scaled) {
+            scaled.recycle();
+        }
+        return cropped;
     }
 
     /**

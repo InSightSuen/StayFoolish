@@ -12,6 +12,7 @@
     <color name="colorTransparent">#0000</color>
     <color name="colorTransparent40">#bb000000</color>
     <color name="colorTransparent70">#b3000000</color>
+    <color name="colorWhite40">#bbffffff</color>
 
     <color name="bgWhite">@color/colorWhite</color>
     <color name="bgGrey">@color/colorGrey</color>
