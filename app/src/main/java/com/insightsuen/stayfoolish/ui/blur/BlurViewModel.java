@@ -45,6 +45,8 @@ public class BlurViewModel extends LifecycleViewModel {
     @Override
     public void onStart(Context context) {
         super.onStart(context);
+        ToastHelper.getInstance().init(context);
+
         mBitmapIn = BitmapUtils.decodeSampledBitmapFromResource(context.getResources(),
                 R.drawable.img_cat, 0, ViewUtils.dp2px(200), Bitmap.Config.ARGB_8888);
         mBitmapOut = new Bitmap[NUM_BITMAPS];
@@ -52,17 +54,47 @@ public class BlurViewModel extends LifecycleViewModel {
             mBitmapOut[i] = Bitmap.createBitmap(mBitmapIn.getWidth(), mBitmapIn.getHeight(), mBitmapIn.getConfig());
         }
         mCurrentBitmap += (mCurrentBitmap + 1) % NUM_BITMAPS;
-
         createScript(context);
-
-        ToastHelper.getInstance().init(context);
-
         startBlur(1.0f);
     }
 
     @Bindable
     public Bitmap getBlurImage() {
         return mBitmapOut[(mCurrentBitmap + 1) % NUM_BITMAPS];
+    }
+
+    void startBlurAnimator() {
+        if (mLatestAnimator != null && mLatestAnimator.isRunning()) {
+            mLatestAnimator.cancel();
+        }
+        mLatestAnimator = ValueAnimator.ofFloat(mBlurRadius, 25.f);
+        mLatestAnimator.setDuration(300);
+        mLatestAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        mLatestAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mBlurRadius = (float) animation.getAnimatedValue();
+                startBlur(mBlurRadius);
+            }
+        });
+        mLatestAnimator.start();
+    }
+
+    void clearBlurAnimator() {
+        if (mLatestAnimator != null && mLatestAnimator.isRunning()) {
+            mLatestAnimator.cancel();
+        }
+        mLatestAnimator = ValueAnimator.ofFloat(mBlurRadius, 1.f);
+        mLatestAnimator.setDuration(300);
+        mLatestAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        mLatestAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mBlurRadius = (float) animation.getAnimatedValue();
+                startBlur(mBlurRadius);
+            }
+        });
+        mLatestAnimator.start();
     }
 
     private void createScript(Context context) {
@@ -82,40 +114,6 @@ public class BlurViewModel extends LifecycleViewModel {
         }
         mLatestTask = new RenderScriptTask();
         mLatestTask.execute(radius);
-    }
-
-    public void startBlurAnimator() {
-        if (mLatestAnimator != null && mLatestAnimator.isRunning()) {
-            mLatestAnimator.cancel();
-        }
-        mLatestAnimator = ValueAnimator.ofFloat(mBlurRadius, 25.f);
-        mLatestAnimator.setDuration(300);
-        mLatestAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        mLatestAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mBlurRadius = (float) animation.getAnimatedValue();
-                startBlur(mBlurRadius);
-            }
-        });
-        mLatestAnimator.start();
-    }
-
-    public void clearBlurAnimator() {
-        if (mLatestAnimator != null && mLatestAnimator.isRunning()) {
-            mLatestAnimator.cancel();
-        }
-        mLatestAnimator = ValueAnimator.ofFloat(mBlurRadius, 1.f);
-        mLatestAnimator.setDuration(300);
-        mLatestAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        mLatestAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mBlurRadius = (float) animation.getAnimatedValue();
-                startBlur(mBlurRadius);
-            }
-        });
-        mLatestAnimator.start();
     }
 
     private void updateImage(Integer result) {

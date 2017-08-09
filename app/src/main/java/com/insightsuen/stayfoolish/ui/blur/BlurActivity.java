@@ -106,6 +106,24 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
         mGroupRoot = findViewById(R.id.group_root);
     }
 
+    private void finishDrag(final View view, int targetMarginTop) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        ValueAnimator animator = ValueAnimator.ofInt(layoutParams.topMargin, targetMarginTop);
+        animator.setDuration(150);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+                layoutParams.topMargin = value;
+                view.setLayoutParams(layoutParams);
+                view.requestLayout();
+            }
+        });
+        animator.start();
+    }
+
     private class DragListener implements View.OnTouchListener {
 
         private int yDelta = 0;
@@ -157,23 +175,5 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
             return true;
         }
 
-    }
-
-    private void finishDrag(final View view, int targetMarginTop) {
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        ValueAnimator animator = ValueAnimator.ofInt(layoutParams.topMargin, targetMarginTop);
-        animator.setDuration(150);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                int value = (int) animation.getAnimatedValue();
-                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-                layoutParams.topMargin = value;
-                view.setLayoutParams(layoutParams);
-                view.requestLayout();
-            }
-        });
-        animator.start();
     }
 }
