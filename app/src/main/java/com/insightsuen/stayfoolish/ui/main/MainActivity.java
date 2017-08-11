@@ -8,6 +8,7 @@ import com.insightsuen.stayfoolish.ui.blur.BlurActivity;
 import com.insightsuen.stayfoolish.ui.drag.DragActivity;
 import com.insightsuen.stayfoolish.ui.style.UnifyStyleActivity;
 import com.insightsuen.stayfoolish.ui.toast.ToastActivity;
+import com.insightsuen.stayfoolish.ui.widget.WidgetActivity;
 
 /**
  * Created by InSight Suen on 2017/7/12.
@@ -33,5 +34,9 @@ public class MainActivity extends BaseActivity {
 
     public void onClickUnifyStyle(View view) {
         UnifyStyleActivity.start(this);
+    }
+
+    public void onClickWidget(View view) {
+        WidgetActivity.start(this);
     }
 }
