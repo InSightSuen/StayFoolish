@@ -24,6 +24,7 @@
         <activity android:name=".ui.toast.ToastActivity"/>
         <activity android:name=".ui.blur.BlurActivity"/>
         <activity android:name=".ui.style.UnifyStyleActivity"/>
+        <activity android:name=".ui.widget.WidgetActivity"/>
     </application>
 
 </manifest>
