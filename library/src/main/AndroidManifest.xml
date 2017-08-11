@@ -2,9 +2,19 @@
 
     package="com.insightsuen.library">
 
-    <application android:allowBackup="true" android:label="@string/app_name"
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <service
+            android:name=".service.AidlService"
+            android:exported="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.insightsuen.library.service.AidlService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

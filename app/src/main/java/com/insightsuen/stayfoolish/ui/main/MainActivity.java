@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.insightsuen.stayfoolish.R;
 import com.insightsuen.stayfoolish.base.BaseActivity;
+import com.insightsuen.stayfoolish.ui.aidl.AidlActivity;
 import com.insightsuen.stayfoolish.ui.blur.BlurActivity;
 import com.insightsuen.stayfoolish.ui.drag.DragActivity;
 import com.insightsuen.stayfoolish.ui.style.UnifyStyleActivity;
@@ -33,5 +34,9 @@ public class MainActivity extends BaseActivity {
 
     public void onClickUnifyStyle(View view) {
         UnifyStyleActivity.start(this);
+    }
+
+    public void onClickAidl(View view) {
+        AidlActivity.start(this);
     }
 }
