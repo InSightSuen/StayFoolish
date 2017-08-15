@@ -7,6 +7,7 @@ import com.insightsuen.stayfoolish.base.BaseActivity;
 import com.insightsuen.stayfoolish.ui.blur.BlurActivity;
 import com.insightsuen.stayfoolish.ui.drag.DragActivity;
 import com.insightsuen.stayfoolish.ui.style.UnifyStyleActivity;
+import com.insightsuen.stayfoolish.ui.thread.ThreadActivity;
 import com.insightsuen.stayfoolish.ui.toast.ToastActivity;
 import com.insightsuen.stayfoolish.ui.widget.WidgetActivity;
 
@@ -38,5 +39,9 @@ public class MainActivity extends BaseActivity {
 
     public void onClickWidget(View view) {
         WidgetActivity.start(this);
+    }
+
+    public void onClickThread(View view) {
+        ThreadActivity.start(this);
     }
 }

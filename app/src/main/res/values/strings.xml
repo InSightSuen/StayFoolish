@@ -6,6 +6,7 @@
     <string name="btn_blur">Blur</string>
     <string name="btn_unify_style">Unify Style</string>
     <string name="btn_widget">Widget</string>
+    <string name="btn_thread">Thread</string>
     <string name="btn_gallery">Gallery</string>
 
     <string name="btn_start">Start</string>
