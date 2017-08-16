@@ -30,24 +30,27 @@ import java.util.List;
  * Drag and drop test Activity
  */
 public class DragActivity extends BaseActivity implements
-        OnStartDragListener,
-        ItemTouchCallbacks {
+        OnStartDragListener, ItemTouchCallbacks {
+
+    private List<SimpleData> mData;
+    private DragAdapter mAdapter;
+    private ItemTouchHelper mTouchHelper;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, DragActivity.class);
         context.startActivity(starter);
     }
 
-    private List<SimpleData> mData;
-    private DragAdapter mAdapter;
-    private ItemTouchHelper mTouchHelper;
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drag);
         initData();
         initWidgets();
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_drag;
     }
 
     private void initData() {

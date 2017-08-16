@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/group_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="4dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:id="@+id/v_drag"
+    <data class=".ui.blur.BlurBinding">
+
+        <variable
+            name="viewModel"
+            type="com.insightsuen.stayfoolish.ui.blur.BlurViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/group_root"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
 
-        <ImageView
-            android:id="@+id/iv_bg"
+        <RelativeLayout
+            android:id="@+id/v_drag"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:layout_height="200dp">
 
-        <TextView
-            android:id="@+id/tv_tap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/rect_white_40_r4dp"
-            android:padding="8dp"
-            android:text="Tap on it"
-            android:textColor="@color/colorPrimary"/>
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@{viewModel.blurImage}"/>
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_tap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/rect_white_40_r4dp"
+                android:padding="8dp"
+                android:text="Tap or Drag"
+                android:textColor="@color/colorPrimary"/>
 
-</LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
