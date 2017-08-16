@@ -14,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class ThreadViewModel extends LifecycleViewModel {
 
-    private StringBuilder mLog;
+    private StringBuilder mLog = new StringBuilder();
 
     @Bindable
     public String getLog() {

@@ -53,5 +53,12 @@
             android:onClick="onClickThread"
             android:text="@string/btn_thread"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:onClick="onClickAidl"
+            android:text="@string/btn_aidl"/>
+
     </LinearLayout>
 </layout>
