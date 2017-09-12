@@ -1,5 +1,7 @@
 package com.insightsuen.stayfoolish.ui.orm;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -15,6 +17,11 @@ import com.insightsuen.stayfoolish.base.BaseActivity;
 public class OrmActivity extends BaseActivity {
 
     private static final String EXTRA_VIEW_MODEL = "OrmViewModel";
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, OrmActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected int getLayoutRes() {

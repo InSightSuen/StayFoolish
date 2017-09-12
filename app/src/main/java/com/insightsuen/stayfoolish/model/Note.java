@@ -2,6 +2,7 @@ package com.insightsuen.stayfoolish.model;
 
 import android.support.annotation.NonNull;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 
 @Entity(indexes = {
-        @Index(value = "text, createTime DESC", unique = true)
+        @Index(value = "title, createTime DESC", unique = true)
 })
 public class Note {
 
@@ -23,19 +24,31 @@ public class Note {
     private Long id;
 
     @NonNull
-    private String text;
+    private String title;
+
+    private String content;
 
     private Date createTime;
 
-    @Generated(hash = 879062434)
-    public Note(Long id, @NonNull String text, Date createTime) {
-        this.id = id;
-        this.text = text;
-        this.createTime = createTime;
-    }
+    @Convert(converter = NoteTypeConverter.class, columnType = String.class)
+    private NoteType type;
 
     @Generated(hash = 1272611929)
     public Note() {
+    }
+
+    public Note(Long id) {
+        this.id = id;
+    }
+
+    @Generated(hash = 2081448229)
+    public Note(Long id, @NonNull String title, String content, Date createTime,
+            NoteType type) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createTime = createTime;
+        this.type = type;
     }
 
     public Long getId() {
@@ -46,12 +59,12 @@ public class Note {
         this.id = id;
     }
 
-    public String getText() {
-        return this.text;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getCreateTime() {
@@ -60,5 +73,21 @@ public class Note {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public NoteType getType() {
+        return this.type;
+    }
+
+    public void setType(NoteType type) {
+        this.type = type;
     }
 }
