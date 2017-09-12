@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -34,6 +35,8 @@ dependencies {
 
     compile 'com.insightsuen.bindroid:bindroid:1.0.3'
     compile 'com.insightsuen.squarelayout:library:1.0.0'
+
+    compile 'org.greenrobot:greendao:3.2.2'
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
