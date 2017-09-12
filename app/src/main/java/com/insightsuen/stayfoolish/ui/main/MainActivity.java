@@ -7,6 +7,7 @@ import com.insightsuen.stayfoolish.base.BaseActivity;
 import com.insightsuen.stayfoolish.ui.aidl.AidlActivity;
 import com.insightsuen.stayfoolish.ui.blur.BlurActivity;
 import com.insightsuen.stayfoolish.ui.drag.DragActivity;
+import com.insightsuen.stayfoolish.ui.handler.HandlerActivity;
 import com.insightsuen.stayfoolish.ui.style.UnifyStyleActivity;
 import com.insightsuen.stayfoolish.ui.thread.ThreadActivity;
 import com.insightsuen.stayfoolish.ui.toast.ToastActivity;
@@ -48,6 +49,10 @@ public class MainActivity extends BaseActivity {
 
     public void onClickAidl(View view) {
         AidlActivity.start(this);
+    }
+
+    public void onCLickHandler(View view) {
+        HandlerActivity.start(this);
     }
 
 }
