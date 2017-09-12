@@ -33,8 +33,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion;
     compile 'com.android.support:cardview-v7:' + rootProject.supportLibraryVersion;
 
-    compile 'com.insightsuen.bindroid:bindroid:1.0.3'
-    compile 'com.insightsuen.squarelayout:library:1.0.0'
+    compile 'com.insightsuen:bindroid:1.0.0'
+    compile 'com.insightsuen:squarelayout:1.0.0'
 
     compile 'org.greenrobot:greendao:3.2.2'
 
