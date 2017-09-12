@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class=".ui.thread.ThreadBinding">
+
+        <variable
+            name="viewModel"
+            type="com.insightsuen.stayfoolish.ui.thread.ThreadViewModel"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/spaceSmall">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/heightButton"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onClickStartMultiTaskByJoin()}"
+                android:text="Start Multi Task by Object.join()"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/heightButton"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onClickStartMultiTaskByCountDownLatch()}"
+                android:text="Start Multi Task by CountDownLatch"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.log}"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class=".HandlerBinding">
+
+        <variable
+            name="viewModel"
+            type="com.insightsuen.stayfoolish.ui.handler.HandlerViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/spaceSmall">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightButton"
+            android:onClick="@{() -> viewModel.onClickSendMsg()}"
+            android:text="Send message"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightButton"
+            android:layout_marginTop="@dimen/spaceNormal"
+            android:onClick="@{() -> viewModel.onClickRemoveAllMessage()}"
+            android:text="Remove all message"/>
+
+    </LinearLayout>
+</layout>
