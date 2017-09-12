@@ -45,6 +45,7 @@ public class OrmViewModel extends LifecycleViewModel {
         }
         if (TextUtils.isEmpty(mNoteContent)) {
             ToastHelper.getInstance().show("Content is empty.");
+            return;
         }
         saveNote(mNoteTitle, mNoteContent);
         mNoteTitle = mNoteContent = "";
@@ -76,6 +77,7 @@ public class OrmViewModel extends LifecycleViewModel {
         newNote.setContent(content);
         newNote.setCreateTime(new Date());
         newNote.setType(NoteType.TEXT);
+        mNoteDao.insert(newNote);
         Log.d(TAG, "saveNote: Inserted new note, ID: " + newNote.getId());
     }
 }
