@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".ui.widget.WidgetBinding">
+
+        <import type="com.insightsuen.stayfoolish.R"/>
+
+        <variable
+            name="viewModel"
+            type="com.insightsuen.stayfoolish.ui.widget.WidgetViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.insightsuen.library.widget.PointProgress
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:background_color="@color/colorGrey"
+            app:max="@{viewModel.max}"
+            app:paint_radius="8dp"
+            app:primary_color="@color/colorPrimary"
+            app:progress="@{viewModel.progress}"
+            app:stroke_width="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/heightButton"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onClickStart()}"
+                android:text="@{viewModel.started ? R.string.btn_stop : R.string.btn_start}"
+                tools:text="@string/btn_start"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/heightButton"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onClickPause()}"
+                android:text="@{viewModel.paused ? R.string.btn_resume : R.string.btn_pause}"
+                tools:text="@string/btn_pause"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.log}"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

@@ -63,7 +63,7 @@ public class BlurActivity extends BaseActivity<BlurBinding> {
     }
 
     private void initWidgets() {
-        mBinding.ivBg.setOnTouchListener(new View.OnTouchListener() {
+        mBinding.tvTap.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {

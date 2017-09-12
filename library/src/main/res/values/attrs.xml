@@ -8,4 +8,13 @@
         </attr>
         <attr name="length" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="PointProgress">
+        <attr name="progress" format="integer|float" />
+        <attr name="max" format="integer|float" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="paint_radius" format="dimension" />
+        <attr name="background_color" format="color" />
+        <attr name="primary_color" format="color" />
+    </declare-styleable>
 </resources>

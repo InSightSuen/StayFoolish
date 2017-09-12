@@ -24,7 +24,10 @@
         <activity android:name=".ui.toast.ToastActivity"/>
         <activity android:name=".ui.blur.BlurActivity"/>
         <activity android:name=".ui.style.UnifyStyleActivity"/>
+        <activity android:name=".ui.widget.WidgetActivity"/>
+        <activity android:name=".ui.thread.ThreadActivity"/>
         <activity android:name=".ui.aidl.AidlActivity"/>
+        <activity android:name=".ui.handler.HandlerActivity"/>
     </application>
 
 </manifest>
