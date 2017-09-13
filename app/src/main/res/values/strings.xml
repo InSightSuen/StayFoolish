@@ -9,6 +9,7 @@
     <string name="btn_thread">Thread</string>
     <string name="btn_aidl">AIDL</string>
     <string name="btn_handler">Handler</string>
+    <string name="btn_orm">Orm</string>
     <string name="btn_gallery">Gallery</string>
 
     <string name="btn_start">Start</string>
