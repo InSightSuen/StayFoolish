@@ -68,15 +68,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:onClick="onCLickHandler"
+                android:onClick="onClickHandler"
                 android:text="@string/btn_handler"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:onClick="onCLickOrm"
+                android:onClick="onClickOrm"
                 android:text="@string/btn_orm"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:onClick="onClickRx"
+                android:text="@string/btn_rx"/>
 
         </LinearLayout>
 

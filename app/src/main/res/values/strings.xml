@@ -10,6 +10,7 @@
     <string name="btn_aidl">AIDL</string>
     <string name="btn_handler">Handler</string>
     <string name="btn_orm">Orm</string>
+    <string name="btn_rx">Rx</string>
     <string name="btn_gallery">Gallery</string>
 
     <string name="btn_start">Start</string>

@@ -30,6 +30,7 @@
         <activity android:name=".ui.aidl.AidlActivity"/>
         <activity android:name=".ui.handler.HandlerActivity"/>
         <activity android:name=".ui.orm.OrmActivity"/>
+        <activity android:name=".ui.rx.RxActivity"/>
     </application>
 
 </manifest>
