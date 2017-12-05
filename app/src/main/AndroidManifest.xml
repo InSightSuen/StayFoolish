@@ -31,6 +31,8 @@
         <activity android:name=".ui.handler.HandlerActivity"/>
         <activity android:name=".ui.orm.OrmActivity"/>
         <activity android:name=".ui.rx.RxActivity"/>
+        <activity android:name=".ui.scroll.NestedScrollActivity"
+            android:theme="@style/AppTheme.CustomerActionBar"/>
     </application>
 
 </manifest>

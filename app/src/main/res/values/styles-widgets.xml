@@ -60,4 +60,9 @@
         <item name="android:textSize">@dimen/textContent</item>
     </style>
 
+    <style name="TextAppearance.Toolbar">
+        <item name="android:textColor">@color/textMainWhite</item>
+        <item name="android:textSize">@dimen/textTitle</item>
+    </style>
+
 </resources>
