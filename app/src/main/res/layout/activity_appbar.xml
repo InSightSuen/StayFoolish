@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class=".ui.scroll.NestedScrolledBinding">
+    <data class=".ui.appbar.AppbarBinding">
 
     </data>
 
@@ -22,8 +22,8 @@
                 android:layout_height="200dp"
                 android:minHeight="48dp"
                 app:contentScrim="?colorPrimary"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="64dp"
+                app:expandedTitleMarginEnd="48dp"
+                app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed|snap"
                 app:titleEnabled="true"
                 app:toolbarId="@+id/toolbar">
@@ -47,9 +47,10 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
+                    app:contentInsetStartWithNavigation="@dimen/spaceNormal"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:title="NestedScroll"/>
+                    app:title="@string/title_appbar_practice"/>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

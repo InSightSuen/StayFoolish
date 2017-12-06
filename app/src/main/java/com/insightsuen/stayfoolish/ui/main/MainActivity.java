@@ -10,7 +10,7 @@ import com.insightsuen.stayfoolish.ui.drag.DragActivity;
 import com.insightsuen.stayfoolish.ui.handler.HandlerActivity;
 import com.insightsuen.stayfoolish.ui.orm.OrmActivity;
 import com.insightsuen.stayfoolish.ui.rx.RxActivity;
-import com.insightsuen.stayfoolish.ui.scroll.NestedScrollActivity;
+import com.insightsuen.stayfoolish.ui.appbar.AppbarActivity;
 import com.insightsuen.stayfoolish.ui.style.UnifyStyleActivity;
 import com.insightsuen.stayfoolish.ui.thread.ThreadActivity;
 import com.insightsuen.stayfoolish.ui.toast.ToastActivity;
@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onClickNestedScroll(View view) {
-        NestedScrollActivity.start(this);
+        AppbarActivity.start(this);
     }
 
 }

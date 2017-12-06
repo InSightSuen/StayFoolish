@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:onClick="onClickNestedScroll"
-                android:text="@string/btn_nested_scroll"/>
+                android:text="@string/btn_appbar"/>
 
         </LinearLayout>
 
