@@ -40,8 +40,9 @@ public class NestedScrollActivity extends BaseActivity<NestedScrolledBinding> {
     }
 
     private void bindView() {
-        mBinding.toolbar.inflateMenu(R.menu.nested_scroll);
         setSupportActionBar(mBinding.toolbar);
+        // noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         List<String> data = new ArrayList<>();
         final int dataSize = 20;
