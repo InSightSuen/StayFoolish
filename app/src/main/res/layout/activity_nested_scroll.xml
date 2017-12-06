@@ -24,7 +24,9 @@
                 app:contentScrim="?colorPrimary"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed|snap"
+                app:titleEnabled="true"
+                app:toolbarId="@+id/toolbar">
 
                 <com.insightsuen.squarelayout.SquareFrameLayout
                     android:layout_width="match_parent"
@@ -44,11 +46,10 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="16dp"
-                    app:title="NestedScroll">
-
-                </android.support.v7.widget.Toolbar>
+                    android:layout_height="?actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:title="NestedScroll"/>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -64,10 +65,11 @@
             style="@style/Widget.Design.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_like"
+            android:src="@drawable/ic_favorite_white_24dp"
             app:fabSize="normal"
             app:layout_anchor="@id/appbar"
-            app:layout_anchorGravity="bottom|end|right"/>
+            app:layout_anchorGravity="bottom|end|right"
+            app:useCompatPadding="true"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

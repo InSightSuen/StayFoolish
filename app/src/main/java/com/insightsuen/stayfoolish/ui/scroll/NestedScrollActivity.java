@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.insightsuen.library.widget.recyclerview.SimpleAdapter;
 import com.insightsuen.stayfoolish.R;
@@ -38,7 +40,8 @@ public class NestedScrollActivity extends BaseActivity<NestedScrolledBinding> {
     }
 
     private void bindView() {
-//        setSupportActionBar(mBinding.toolbar);
+        mBinding.toolbar.inflateMenu(R.menu.nested_scroll);
+        setSupportActionBar(mBinding.toolbar);
 
         List<String> data = new ArrayList<>();
         final int dataSize = 20;
@@ -48,7 +51,12 @@ public class NestedScrollActivity extends BaseActivity<NestedScrolledBinding> {
         RecyclerView.Adapter adapter = new SimpleAdapter(data);
         mBinding.rvData.setAdapter(adapter);
         mBinding.rvData.setLayoutManager(new LinearLayoutManager(this));
-//        mBinding.rvData.setNestedScrollingEnabled(false);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nested_scroll, menu);
+        return true;
+    }
 }
