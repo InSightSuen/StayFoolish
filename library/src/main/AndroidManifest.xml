@@ -15,6 +15,7 @@
                 <action android:name="com.insightsuen.library.service.AidlService"/>
             </intent-filter>
         </service>
+        <activity android:name=".helper.permission.PermissionActivity"/>
     </application>
 
 </manifest>

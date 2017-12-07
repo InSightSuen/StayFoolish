@@ -1,5 +1,7 @@
 package com.insightsuen.stayfoolish.ui.appbar;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,9 +18,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.insightsuen.library.helper.permission.OnPermissionRequestResult;
+import com.insightsuen.library.helper.permission.PermissionHelper;
 import com.insightsuen.library.widget.recyclerview.SimpleAdapter;
 import com.insightsuen.stayfoolish.R;
 import com.insightsuen.stayfoolish.base.BaseActivity;
+import com.insightsuen.stayfoolish.loader.ContentLoaderManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +35,8 @@ import java.util.List;
 
 public class AppbarActivity extends BaseActivity<AppbarBinding> {
 
+    private ContentLoaderManager mManager;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, AppbarActivity.class);
         context.startActivity(starter);
@@ -38,7 +45,29 @@ public class AppbarActivity extends BaseActivity<AppbarBinding> {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkPermission();
         bindView();
+    }
+
+    @SuppressLint("InlinedApi")
+    private void checkPermission() {
+        PermissionHelper.getInstance().checkPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE, new OnPermissionRequestResult() {
+            @Override
+            public void onGrandResult(boolean allGranted, String[] grantedPermissions, String[] deniedPermissions) {
+                if (allGranted) {
+                    initData();
+                } else {
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void initData() {
+        if (mManager == null) {
+            mManager = new ContentLoaderManager(AppbarActivity.this);
+        }
+        mManager.init();
     }
 
     @Override
@@ -94,6 +123,7 @@ public class AppbarActivity extends BaseActivity<AppbarBinding> {
     }
 
     private Cursor getQueryCursor() {
+
         return null;
     }
 
