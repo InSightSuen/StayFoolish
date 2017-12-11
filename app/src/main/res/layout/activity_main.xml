@@ -85,6 +85,13 @@
                 android:onClick="onClickRx"
                 android:text="@string/btn_rx"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:onClick="onClickNestedScroll"
+                android:text="@string/btn_appbar"/>
+
         </LinearLayout>
 
     </ScrollView>

@@ -1,5 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="com.insightsuen.stayfoolish">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -31,6 +30,14 @@
         <activity android:name=".ui.handler.HandlerActivity"/>
         <activity android:name=".ui.orm.OrmActivity"/>
         <activity android:name=".ui.rx.RxActivity"/>
+        <activity android:name=".ui.appbar.AppbarActivity"
+            android:theme="@style/AppTheme.CustomerActionBar"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

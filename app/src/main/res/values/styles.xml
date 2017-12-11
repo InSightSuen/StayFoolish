@@ -23,4 +23,9 @@
         <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
 
+    <style name="AppTheme.CustomerActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
 </resources>

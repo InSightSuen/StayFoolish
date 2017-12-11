@@ -11,10 +11,18 @@
     <string name="btn_handler">Handler</string>
     <string name="btn_orm">Orm</string>
     <string name="btn_rx">Rx</string>
+    <string name="btn_appbar">Appbar</string>
     <string name="btn_gallery">Gallery</string>
 
     <string name="btn_start">Start</string>
     <string name="btn_stop">Stop</string>
     <string name="btn_pause">Pause</string>
     <string name="btn_resume">Resume</string>
+
+    <string name="title_appbar_practice">Appbar Practice</string>
+
+    <string name="action_search">搜索</string>
+    <string name="action_share">分享</string>
+    <string name="action_settings">设置</string>
+    <string name="action_about">关于</string>
 </resources>
