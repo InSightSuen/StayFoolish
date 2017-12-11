@@ -1,11 +1,9 @@
 package com.insightsuen.library.helper.permission;
 
 import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.support.v4.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,19 +24,23 @@ public class PermissionHelper {
     }
 
     public void checkPermissions(Activity activity, String[] permissions, OnPermissionRequestResult callback) {
-        List<String> requests = new ArrayList<>();
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(activity, permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requests.add(permission);
-            }
-        }
-        mCallback = new WeakReference<OnPermissionRequestResult>(callback);
-        requestPermission(activity, requests.toArray(new String[requests.size()]));
+        PermissionRequest.Builder builder = new PermissionRequest.Builder(permissions);
+        checkPermissions(activity, builder.build(), callback);
     }
 
-    private void requestPermission(Activity activity, String[] permissions) {
-        PermissionActivity.start(activity, permissions);
+    public void checkPermissions(Activity activity, PermissionRequest permissionRequest,
+                                 OnPermissionRequestResult callback) {
+        checkPermissions(activity, Collections.singletonList(permissionRequest), callback);
+    }
+
+    public void checkPermissions(Activity activity, List<PermissionRequest> permissionRequests,
+                                 OnPermissionRequestResult callback) {
+        mCallback = new WeakReference<>(callback);
+        requestPermission(activity, permissionRequests);
+    }
+
+    private void requestPermission(Activity activity, List<PermissionRequest> permissionRequests) {
+        PermissionActivity.start(activity, permissionRequests);
     }
 
     void onRequestResult(boolean allGranted, String[] grantedPermissions, String[] deniedPermissions) {

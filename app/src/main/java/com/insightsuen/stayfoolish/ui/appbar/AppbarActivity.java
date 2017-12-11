@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.insightsuen.library.helper.ToastHelper;
 import com.insightsuen.library.helper.permission.OnPermissionRequestResult;
 import com.insightsuen.library.helper.permission.PermissionHelper;
 import com.insightsuen.library.widget.recyclerview.SimpleAdapter;
@@ -51,12 +52,14 @@ public class AppbarActivity extends BaseActivity<AppbarBinding> {
 
     @SuppressLint("InlinedApi")
     private void checkPermission() {
-        PermissionHelper.getInstance().checkPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE, new OnPermissionRequestResult() {
+        PermissionHelper.getInstance().checkPermission(
+                this, Manifest.permission.READ_EXTERNAL_STORAGE, new OnPermissionRequestResult() {
             @Override
             public void onGrandResult(boolean allGranted, String[] grantedPermissions, String[] deniedPermissions) {
                 if (allGranted) {
                     initData();
                 } else {
+                    ToastHelper.getInstance().show("未获取权限");
                     finish();
                 }
             }
