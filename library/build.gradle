@@ -1,17 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,12 +23,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
-    implementation 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:' + rootProject.espressoVersion, {
+    /* Android support */
+    implementation "com.android.support:appcompat-v7:${rootProject.androidSupportVersion}"
+
+    /* Widgets */
+    implementation "com.android.support:recyclerview-v7:${rootProject.androidSupportVersion}"
+
+    /* Test */
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:${rootProject.espressoVersion}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation 'junit:junit:' + rootProject.junitVersion;
-    testImplementation 'org.mockito:mockito-core:' + rootProject.mockitoVersion;
+    testImplementation "junit:junit:${rootProject.junitVersion}"
+    testImplementation "org.mockito:mockito-core:${rootProject.mockitoVersion}"
 }
