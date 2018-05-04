@@ -14,6 +14,7 @@
     <dimen name="cornerNormal">4dp</dimen>
     <dimen name="cornerSmall">2dp</dimen>
 
+    <dimen name="textTitle">24sp</dimen>
     <dimen name="textMain">18sp</dimen>
     <dimen name="textSecond">16sp</dimen>
     <dimen name="textContent">14sp</dimen>
