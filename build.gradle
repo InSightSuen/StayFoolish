@@ -3,9 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:3.1.2'
 
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
@@ -14,6 +15,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -22,8 +24,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    buildToolsVersion = "25.0.2"
-    supportLibraryVersion = "25.3.1"
+    supportLibraryVersion = "27.1.1"
 
     junitVersion = "4.12"
     espressoVersion = "2.2.2"

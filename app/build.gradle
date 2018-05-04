@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion 27
+
     defaultConfig {
         applicationId "com.insightsuen.stayfoolish"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 19
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,22 +27,22 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':library')
-    compile 'com.android.support:appcompat-v7:' + rootProject.supportLibraryVersion
-    compile 'com.android.support:design:' + rootProject.supportLibraryVersion
-    compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion
-    compile 'com.android.support:cardview-v7:' + rootProject.supportLibraryVersion
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':library')
+    implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support:design:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion
+    implementation 'com.android.support:cardview-v7:' + rootProject.supportLibraryVersion
 
-    compile 'com.insightsuen:bindroid:1.0.0'
-    compile 'com.insightsuen:squarelayout:1.0.0'
+    implementation 'com.insightsuen:bindroid:1.0.0'
+    implementation 'com.insightsuen:squarelayout:1.0.0'
 
-    compile 'org.greenrobot:greendao:3.2.2'
-    compile "io.reactivex:rxjava:1.1.6"
-    compile 'io.reactivex:rxandroid:1.2.1'
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation "io.reactivex:rxjava:1.1.6"
+    implementation 'io.reactivex:rxandroid:1.2.1'
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:' + rootProject.junitVersion;
+    testImplementation 'junit:junit:' + rootProject.junitVersion;
 }

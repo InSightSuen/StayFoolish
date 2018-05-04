@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 19
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -22,13 +21,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:' + rootProject.supportLibraryVersion
-    compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
+    implementation 'com.android.support:recyclerview-v7:' + rootProject.supportLibraryVersion
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:' + rootProject.espressoVersion, {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:' + rootProject.espressoVersion, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:' + rootProject.junitVersion;
-    testCompile 'org.mockito:mockito-core:' + rootProject.mockitoVersion;
+    testImplementation 'junit:junit:' + rootProject.junitVersion;
+    testImplementation 'org.mockito:mockito-core:' + rootProject.mockitoVersion;
 }
