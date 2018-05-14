@@ -92,6 +92,13 @@
                 android:onClick="onClickNestedScroll"
                 android:text="@string/btn_appbar"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:onClick="onClickIdentify"
+                android:text="@string/btn_identify"/>
+
         </LinearLayout>
 
     </ScrollView>

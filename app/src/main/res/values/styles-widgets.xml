@@ -6,6 +6,18 @@
         <item name="android:textAppearance">@style/TextAppearance.TextView</item>
     </style>
 
+    <style name="TextView.Title">
+        <item name="android:textAppearance">@style/TextAppearance.Title</item>
+    </style>
+
+    <style name="TextView.Main">
+        <item name="android:textAppearance">@style/TextAppearance.Main</item>
+    </style>
+
+    <style name="TextView.Content">
+        <item name="android:textAppearance">@style/TextAppearance.Content</item>
+    </style>
+
     <style name="Button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rect_primary_r4dp</item>
         <item name="android:textAllCaps">false</item>
@@ -46,6 +58,21 @@
     </style>
 
     <style name="TextAppearance.TextView">
+        <item name="android:textColor">@color/textContent</item>
+        <item name="android:textSize">@dimen/textContent</item>
+    </style>
+
+    <style name="TextAppearance.Title">
+        <item name="android:textColor">@color/textMain</item>
+        <item name="android:textSize">@dimen/textTitle</item>
+    </style>
+
+    <style name="TextAppearance.Main">
+        <item name="android:textColor">@color/textMain</item>
+        <item name="android:textSize">@dimen/textMain</item>
+    </style>
+
+    <style name="TextAppearance.Content">
         <item name="android:textColor">@color/textContent</item>
         <item name="android:textSize">@dimen/textContent</item>
     </style>
