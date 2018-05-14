@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data class=".ui.identify.IdentifyBinding">
+
+        <variable
+            name="viewModel"
+            type="com.insightsuen.stayfoolish.ui.identify.IdentifyViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Android ID" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.androidId}" />
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Build Serial" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.buildSerial}" />
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WiFi MAC Address" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.wifiMacAddress}" />
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bluetooth MAC Address" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.bluetoothMacAddress}" />
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="IMEI" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.imei}" />
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MEID" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.meid}" />
+
+        <TextView
+            style="@style/TextView.Main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Device ID" />
+
+        <TextView
+            style="@style/TextView.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.deviceId}" />
+
+    </LinearLayout>
+</layout>

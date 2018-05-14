@@ -8,6 +8,7 @@ import com.insightsuen.stayfoolish.ui.aidl.AidlActivity;
 import com.insightsuen.stayfoolish.ui.blur.BlurActivity;
 import com.insightsuen.stayfoolish.ui.drag.DragActivity;
 import com.insightsuen.stayfoolish.ui.handler.HandlerActivity;
+import com.insightsuen.stayfoolish.ui.identify.IdentityActivity;
 import com.insightsuen.stayfoolish.ui.orm.OrmActivity;
 import com.insightsuen.stayfoolish.ui.rx.RxActivity;
 import com.insightsuen.stayfoolish.ui.appbar.AppbarActivity;
@@ -68,6 +69,10 @@ public class MainActivity extends BaseActivity {
 
     public void onClickNestedScroll(View view) {
         AppbarActivity.start(this);
+    }
+
+    public void onClickIdentify(View view) {
+        IdentityActivity.start(this);
     }
 
 }

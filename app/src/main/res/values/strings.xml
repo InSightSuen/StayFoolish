@@ -12,6 +12,7 @@
     <string name="btn_orm">Orm</string>
     <string name="btn_rx">Rx</string>
     <string name="btn_appbar">Appbar</string>
+    <string name="btn_identify">Identify</string>
     <string name="btn_gallery">Gallery</string>
 
     <string name="btn_start">Start</string>

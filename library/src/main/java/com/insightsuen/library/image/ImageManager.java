@@ -1,5 +1,6 @@
 package com.insightsuen.library.image;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -96,6 +97,7 @@ public class ImageManager {
         private Drawable mPlaceholderDrawable;
         private boolean mFadeIn = true;
 
+        @SuppressLint("ResourceType")
         public void setPlaceholder(@DimenRes int placeholderResId) {
             if (placeholderResId <= 0) {
                 throw new IllegalArgumentException("placeholder resource id must be positive.");
